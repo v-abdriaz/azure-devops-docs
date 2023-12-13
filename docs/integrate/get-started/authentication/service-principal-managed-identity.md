@@ -141,12 +141,35 @@ A: Service principals and managed identities are priced similarly as users, base
 
 A: Yes! Anywhere that asks for PATs in the [Azure CLI](/cli/azure/authenticate-azure-cli) can also accept [Microsoft Entra ID access tokens](#get-a-microsoft-entra-id-token). See these examples for how you might pass a Microsoft Entra token in to authenticate with CLI.
 
-```powershell
-# To authenticate with a command: After typing this command, the az devops login will prompt you to enter a token. You can add an Entra ID token too! Not just a PAT.
+# [Bash](#tab/bash)
+
+```azurecli-interactive
+# To authenticate with a command (interactively with a token or PAT):
 az devops login
 
 # To authenticate a service principal with a password or cert:
-az login --service-principal -u <app-id> -p <password-or-cert> --tenant <tenant>
+app_id="<your-app-id>"
+password_or_cert="<your-password-or-cert>"
+tenant_id="<your-tenant-id>"
+
+az login --service-principal -u $app_id -p $password_or_cert --tenant $tenant_id
+
+# To authenticate a managed identity:
+az login --identity
+```
+
+# [PowerShell](#tab/powershell)
+
+```azurecli-interactive
+# To authenticate with a command (interactively with a token or PAT):
+az devops login
+
+# To authenticate a service principal with a password or cert:
+$app_id = "<your-app-id>"
+$password_or_cert = "<your-password-or-cert>"
+$tenant_id = "<your-tenant-id>"
+
+az login --service-principal -u $app_id -p $password_or_cert --tenant $tenant_id
 
 # To authenticate a managed identity:
 az login --identity
@@ -154,7 +177,23 @@ az login --identity
 
 Now, let's get a Microsoft Entra token (the Azure DevOps resource's UUID is `499b84ac-1321-427f-aa17-267ca6975798`) and try to call an Azure DevOps API by passing it in the headers as a `Bearer` token:
 
-```powershell
+# [Bash](#tab/bash)
+
+```azurecli-interactive
+echo "Obtain access token for Service Connection identity..."
+accessToken=$(az account get-access-token --resource 499b84ac-1321-427f-aa17-267ca6975798 --query "accessToken" --output tsv)
+
+echo "Use access token with Azure DevOps REST API to list projects in the organization..."
+apiVersion="7.1-preview.1"
+yourUsername="<your-username>"
+uri="https://dev.azure.com/${yourUsername}/_apis/projects?api-version=${apiVersion}"
+curl -H "Accept: application/json" -H "Authorization: Bearer $accessToken" -X GET $uri | jq '.value[] | {id, name}'
+```
+
+# [PowerShell](#tab/powershell)
+
+```azurecli-interactive
+
 Write-Host "Obtain access token for Service Connection identity..."
 $accessToken = az account get-access-token --resource 499b84ac-1321-427f-aa17-267ca6975798 --query "accessToken" --output tsv
 
