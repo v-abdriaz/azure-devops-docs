@@ -141,7 +141,7 @@ A: Service principals and managed identities are priced similarly as users, base
 
 A: Yes! Anywhere that asks for PATs in the [Azure CLI](/cli/azure/authenticate-azure-cli) can also accept [Microsoft Entra ID access tokens](#get-a-microsoft-entra-id-token). See these examples for how you might pass a Microsoft Entra token in to authenticate with CLI.
 
-# [Bash](#tab/bash)
+# [Bash](# tab/bash)
 
 ```azurecli-interactive
 # To authenticate with a command (interactively with a token or PAT):
@@ -158,7 +158,7 @@ az login --service-principal -u $app_id -p $password_or_cert --tenant $tenant_id
 az login --identity
 ```
 
-# [PowerShell](#tab/powershell)
+# [PowerShell](# tab/powershell)
 
 ```azurecli-interactive
 # To authenticate with a command (interactively with a token or PAT):
@@ -177,7 +177,7 @@ az login --identity
 
 Now, let's get a Microsoft Entra token (the Azure DevOps resource's UUID is `499b84ac-1321-427f-aa17-267ca6975798`) and try to call an Azure DevOps API by passing it in the headers as a `Bearer` token:
 
-# [Bash](#tab/bash)
+# [Bash](# tab/bash)
 
 ```azurecli-interactive
 echo "Obtain access token for Service Connection identity..."
@@ -190,7 +190,7 @@ uri="https://dev.azure.com/${yourUsername}/_apis/projects?api-version=${apiVersi
 curl -H "Accept: application/json" -H "Authorization: Bearer $accessToken" -X GET $uri | jq '.value[] | {id, name}'
 ```
 
-# [PowerShell](#tab/powershell)
+# [PowerShell](# tab/powershell)
 
 ```azurecli-interactive
 
@@ -216,7 +216,7 @@ A: You can only add a managed identity from the same tenant that your organizati
 1. Create a [user-assigned managed identity](/azure/active-directory/managed-identities-azure-resources/how-manage-user-assigned-managed-identities) in Azure portal for your resource tenant. 
 2. Connect it to a [virtual machine and assign this managed identity](/azure/active-directory/managed-identities-azure-resources/qs-configure-portal-windows-vm) to it. 
 3. Create a [key vault](/azure/key-vault/general/quick-create-portal) and generate a [certificate](/azure/key-vault/certificates/quick-create-portal) (can't be of type "PEM"). When you generate this certificate, a secret with the same name is also generated, which we use later. 
-4. Grant access to the managed identity so that it can read the private key from the key vault. Create an access policy in the key vault with the "Get/List" permissions (under "Secret permissions" and search for the managed identity under "Select principal."
+4. Grant access to the managed identity so that it can read the private key from the key vault. Create an access policy in the key vault with the "Get/List" permissions under "Secret permissions" and search for the managed identity under "Select principal."
 5. Download the created certificate in "CER" format, which ensures that it doesn't contain the private part of your certificate.
 6. Create a new application registration in the target tenant.
 7. Upload the downloaded certificate to this new application in the "Certificates & secrets" tab.
