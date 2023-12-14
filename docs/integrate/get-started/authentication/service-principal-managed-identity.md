@@ -171,7 +171,7 @@ $tenant_id = "<your-tenant-id>"
 
 az login --service-principal -u $app_id -p $password_or_cert --tenant $tenant_id
 
-# To authenticate a managed identity:
+# To authenticate a managed identity
 az login --identity
 ```
 
