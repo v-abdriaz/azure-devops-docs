@@ -119,7 +119,7 @@ Service principals can be used to call Azure DevOps REST APIs and do most action
 > [!NOTE]
 > You can only use Application ID and not the Resource URIs associated with Azure DevOps for generating tokens.
 
-## FAQs
+## Frequently Asked Questions (FAQs)
 
 ### General
 
@@ -141,7 +141,7 @@ A: Service principals and managed identities are priced similarly as users, base
 
 A: Yes! Anywhere that asks for PATs in the [Azure CLI](/cli/azure/authenticate-azure-cli) can also accept [Microsoft Entra ID access tokens](#get-a-microsoft-entra-id-token). See these examples for how you might pass a Microsoft Entra token in to authenticate with CLI.
 
-# [Bash](#tab/bash)
+# [Bash](# tab/bash)
 
 ```azurecli-interactive
 # To authenticate with a command (interactively with a token or PAT):
@@ -158,7 +158,7 @@ az login --service-principal -u $app_id -p $password_or_cert --tenant $tenant_id
 az login --identity
 ```
 
-# [PowerShell](#tab/powershell)
+# [PowerShell](# tab/powershell)
 
 ```azurecli-interactive
 # To authenticate with a command (interactively with a token or PAT):
@@ -177,7 +177,7 @@ az login --identity
 
 Now, let's get a Microsoft Entra token (the Azure DevOps resource's UUID is `499b84ac-1321-427f-aa17-267ca6975798`) and try to call an Azure DevOps API by passing it in the headers as a `Bearer` token:
 
-# [Bash](#tab/bash)
+# [Bash](# tab/bash)
 
 ```azurecli-interactive
 echo "Obtain access token for Service Connection identity..."
@@ -190,7 +190,7 @@ uri="https://dev.azure.com/${yourUsername}/_apis/projects?api-version=${apiVersi
 curl -H "Accept: application/json" -H "Authorization: Bearer $accessToken" -X GET $uri | jq '.value[] | {id, name}'
 ```
 
-# [PowerShell](#tab/powershell)
+# [PowerShell](# tab/powershell)
 
 ```azurecli-interactive
 
