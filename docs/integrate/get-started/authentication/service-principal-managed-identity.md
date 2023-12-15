@@ -119,7 +119,7 @@ Service principals can be used to call Azure DevOps REST APIs and do most action
 > [!NOTE]
 > You can only use Application ID and not the Resource URIs associated with Azure DevOps for generating tokens.
 
-## Frequently Asked Questions (FAQs)
+## FAQs
 
 ### General
 
@@ -171,7 +171,7 @@ $tenant_id = "<your-tenant-id>"
 
 az login --service-principal -u $app_id -p $password_or_cert --tenant $tenant_id
 
-# To authenticate a managed identity:
+# To authenticate a managed identity
 az login --identity
 ```
 
