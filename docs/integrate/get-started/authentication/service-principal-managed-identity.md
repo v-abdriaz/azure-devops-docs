@@ -119,7 +119,7 @@ Service principals can be used to call Azure DevOps REST APIs and do most action
 > [!NOTE]
 > You can only use Application ID and not the Resource URIs associated with Azure DevOps for generating tokens.
 
-## Frequently Asked Questions (FAQs)
+## FAQs
 
 ### General
 
